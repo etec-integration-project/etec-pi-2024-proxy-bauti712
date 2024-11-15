@@ -45,16 +45,28 @@ services:
       - frontend
       - app
     
-
-  # proxy:
-  #   build: https://raw.githubusercontent.com/etec-integration-project/etec-pi-2024-backend-bauti712/main/proxy/Dockerfile
+  # web:
+  #   build:
+  #     context: https://github.com/etec-integration-project/etec-pi-2024-proxy-bauti712.git
+  #     dockerfile: dockerfile
   #   ports:
-  #     - "80:80"
+  #     - 9090:80
   #   depends_on:
   #     - frontend
   #     - app
   #   networks:
   #     - bauti-app-network
+  
+
+  proxy:
+    build: https://raw.githubusercontent.com/etec-integration-project/etec-pi-2024-proxy-bauti712/refs/heads/main/dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - app
+    networks:
+      - bauti-app-network
 
 networks:
   bauti-app-network:
